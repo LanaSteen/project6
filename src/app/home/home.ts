@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Helper } from '../services/helper';
 import { Api } from '../services/api';
 import { Product } from '../models/product';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,7 @@ import { RouterLink } from "@angular/router";
 })
 export class Home {
    
-     constructor(private help : Helper, private api : Api, private cdr : ChangeDetectorRef){
+     constructor(private help : Helper, private api : Api, private cdr : ChangeDetectorRef, private router : Router){
       // console.log(this.help.clearString("            hELllo    "));
       console.log(this.help.greeting);
 
@@ -25,28 +25,37 @@ export class Home {
 
 
     ngOnInit(){
-        this.api.getAll("Products/GetAll").subscribe((resp:any) => {
+      
+        this.api.getAll("Products/GetAll").subscribe({
+          next : (resp:any) => {
           console.log(resp)
            this.productsarr = resp 
 
           this.cdr.detectChanges()  // ყველა ქოლის მერე დაამატეთ 
            
+        },
+          error : er => alert(er)
         })
 
-
-          this.api.getAll("Categories/GetAll").subscribe((resp:any) => {
+          this.api.getAll("Categories/GetAll").subscribe({
+            next : (resp:any) => {
           console.log(resp)
            this.categories = resp 
 
           this.cdr.detectChanges()  // ყველა ქოლის მერე დაამატეთ 
            
-        })
+        },
+          error : er => alert(er)
+          })
 
-        this.api.getAll2("products").subscribe((resp:any) => {
+        this.api.getAll2("products").subscribe({
+          next : (resp:any) => {
           console.log(resp.data.products)
            
           this.cdr.detectChanges()  // ყველა ქოლის მერე დაამატეთ 
            
+        },
+          error : er => alert(er)
         })
 
         
@@ -61,6 +70,13 @@ export class Home {
      productsarr :Product[]=[]
 
     //  inject()
+
+
+
+
+
+
+
 }
 
 
