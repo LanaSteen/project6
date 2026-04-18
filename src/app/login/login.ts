@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Api } from '../services/api';
 import { LoginUser } from '../models/user';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -19,10 +21,15 @@ loginUser : LoginUser = {
   password : "Stepacc210@gmail.com"
 }
 
-  login(){
+  login(form : any){
       // localStorage.setItem("token", "token")
 
-      this.api.postObj("auth/login", this.loginUser)
+      console.log(form);
+      console.log(form.value);
+      console.log(form.valid);
+      
+
+      this.api.postObj("auth/login", form.value)
       .subscribe((resp : any) =>{ 
          console.log(resp.data.accessToken);
          console.log(resp.data.refreshToken);
