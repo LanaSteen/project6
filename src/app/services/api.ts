@@ -11,6 +11,7 @@ export class Api {
 
   baseUrl = 'https://restaurant.stepprojects.ge/api/';
   baseUrl2 = 'https://restaurantapi.stepacademy.ge/api/';
+// auth/login
   apiKey = '14c34c99-91b6-41a8-ad96-f4d3dc43e35b';
 
   getAll(url: string) {
@@ -24,6 +25,18 @@ export class Api {
       },
     });
   }
+
+
+
+  postObj(url: string, obj: any){
+    return this.http.post(this.baseUrl2+url,obj, {
+        headers: {
+        'X-API-KEY': this.apiKey,
+      }
+    } )
+  }
 }
+
+// auth/login
 
 // http client     --  fetch
