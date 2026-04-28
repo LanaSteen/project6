@@ -5,7 +5,10 @@
 
 
 @for (item of categories; track $index) {
-  <button>{{item.name}}</button>
+  <!-- <button>{{item.name}}</button> -->
+
+
+  <app-button [text]="item.name"></app-button>
 }
 
 @for (item of productsarr; track $index) {

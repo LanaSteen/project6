@@ -3,10 +3,11 @@ import { Helper } from '../services/helper';
 import { Api } from '../services/api';
 import { Product } from '../models/product';
 import { Router, RouterLink } from "@angular/router";
+import { Button } from "../components/button/button";
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, Button],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
